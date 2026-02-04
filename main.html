@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Very Important Question</title>
+
+    <style>
+        /* General Body Styles */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e6d7c3; /* Light brown */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Hide confetti overflow */
+        }
+
+        /* Main container for content */
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Heading style */
+        h1, h2 {
+            color: #e91e63; /* Vibrant pink */
+            font-family: 'Pacifico', cursive; /* A playful, romantic font */
+            font-size: 3rem;
+        }
+
+        /* Responsive font size for smaller screens */
+        @media (max-width: 600px) {
+            h1, h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Container for the buttons */
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* General button styles */
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px; /* Rounded buttons */
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: white;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, padding 0.3s ease, font-size 0.3s ease;
+            font-weight: bold;
+        }
+
+        /* Specific style for the 'Yes' button */
+        #yes-button {
+            background-color: #4CAF50; /* Green */
+        }
+
+        /* Specific style for the 'No' button */
+        #no-button {
+            background-color: #f44336; /* Red */
+        }
+
+        /* Hover effect for buttons */
+        #yes-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #no-button:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Styles for the success state */
+        #success-container {
+            display: none; /* Initially hidden */
+        }
+
+        #celebration-gif {
+            margin-top: 20px;
+            max-width: 80%;
+            border-radius: 15px;
+        }
+
+        /* Confetti animation */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f06;
+            opacity: 0.7;
+            animation: fall 5s linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Import for the playful font */
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+        /* Style for the starting GIF */
+        .start-gif {
+            width: 200px;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main content: The initial question and buttons -->
+    <div class="container" id="main-container">
+        <!-- REPLACE THE SRC URL BELOW WITH YOUR OWN GIF LINK -->
+        <img class="start-gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTAyMnkwYm94aHZpZDlkNzM2bzc1ZXhzdnVwZGR2eDk5cjVyNzNtOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/e1Tf1eOo6976zuGv3C/giphy.gif" alt="Cute starting GIF">
+        <h1>💝 Will you be my Valentine? 💝</h1>
+        <div class="buttons">
+            <button id="yes-button">Yes</button>
+            <button id="no-button">No</button>
+        </div>
+    </div>
+
+    <!-- Success content: Shown after clicking 'Yes' -->
+    <div class="container" id="success-container">
+<p style="color: rgb(248, 0, 41); font-size: 48px; font-weight: bold;">
+  Woohoo 💖 I <span style="color: rgb(255, 121, 143); font-weight: bold;">LOVE</span>  you so much cutie pie!
+</p>
+
+
+<p style="font-weight: bold; color: black;">
+  By clicking YES you agree to:
+</p>
+
+<p>ALL the big bites</p>
+<p>Unlimited cuddles</p>
+<p>Lifetime supply of jokes you can steal</p>
+<p>EFFECTIVE IMMEDIATELY!</p>
+
+        </h2>
+        <!-- REPLACE THE SRC URL BELOW WITH YOUR OWN GIF LINK -->
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2F4Zjl0bmJqcjFwaWUxenUybnl3amt2ZTQxNzJlcXdjYXBnbm9oOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qKQQUKSSbWBkO2V3KX/giphy.gif" alt="Celebration Picture 1">
+        
+        </div>
+    </div>
+
+    <script>
+        // --- Element Selection ---
+        // Get references to the HTML elements we'll be interacting with.
+        const mainContainer = document.getElementById('main-container');
+        const successContainer = document.getElementById('success-container');
+        const yesButton = document.getElementById('yes-button');
+        const noButton = document.getElementById('no-button');
+
+        // --- State Variables ---
+        // Keep track of the 'No' button click count and the current size of the 'Yes' button.
+        let noClickCount = 0;
+        let yesButtonSize = 1;
+
+        // --- 'No' Button Messages ---
+        // An array of funny/desperate messages to display on the 'No' button.
+        const noButtonMessages = [
+            "Really?",
+            "Are you sure?",
+            "Please reconsider!",
+            "But... why?",
+            "I'll be sad :(",
+            "Last chance!",
+            "You're breaking my heart!",
+            "Okay, fine...",
+        ];
+
+        // --- Event Listener for 'No' Button ---
+        // This function runs every time the 'No' button is clicked.
+        noButton.addEventListener('click', () => {
+            // Increment the click counter.
+            noClickCount++;
+
+            // Increase the size of the 'Yes' button.
+            // We increase padding and font size for a more noticeable effect.
+            const currentPadding = 15 * (1 + noClickCount * 0.2);
+            const currentFontSize = 1.2 * (1 + noClickCount * 0.2);
+            yesButton.style.padding = `${currentPadding}px ${currentPadding * 2}px`;
+            yesButton.style.fontSize = `${currentFontSize}rem`;
+
+            // Update the 'No' button's text to a new message from the array.
+            // The modulo operator (%) ensures we loop back to the start of the array.
+            noButton.textContent = noButtonMessages[noClickCount % noButtonMessages.length];
+        });
+
+        // --- Event Listener for 'Yes' Button ---
+        // This function runs when the 'Yes' button is clicked.
+        yesButton.addEventListener('click', () => {
+            // Hide the main question container.
+            mainContainer.style.display = 'none';
+            // Show the success/celebration container.
+            successContainer.style.display = 'block';
+            // Start the confetti animation.
+            startConfetti();
+        });
+
+        // --- Confetti Functions ---
+        // An array of pastel colors for the confetti.
+        const confettiColors = ['#fdefee', '#ffc1cc', '#e91e63', '#f8bbd0', '#c2185b'];
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            
+            // Set a random horizontal position.
+            confetti.style.left = Math.random() * 100 + 'vw';
+            // Set a random animation duration for a more natural effect.
+            confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+            // Set a random background color from our array.
+            confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+
+            document.body.appendChild(confetti);
+
+            // Remove the confetti element after its animation finishes to keep the DOM clean.
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+
+        function startConfetti() {
+            // Create a new piece of confetti every 100 milliseconds for a continuous stream.
+            setInterval(createConfetti, 100);
+            setInterval(createConfetti, 20);
+        }
+    </script>
+
+</body>
+</html>
