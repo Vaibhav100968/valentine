@@ -6,39 +6,38 @@
     <title>A Very Important Question</title>
 
     <style>
-        /* General Body Styles */
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            background-color: #e6d7c3; /* Light brown */
+            background-color: #e6d7c3;
             font-family: 'Arial', sans-serif;
-            overflow: hidden; /* Hide confetti overflow */
+            overflow-x: hidden;
         }
 
-        /* Main container for content */
+        
         .container {
             text-align: center;
             padding: 20px;
         }
 
-        /* Heading style */
+
         h1, h2 {
-            color: #e91e63; /* Vibrant pink */
-            font-family: 'Pacifico', cursive; /* A playful, romantic font */
+            color: #e91e63; 
+            font-family: 'Pacifico', cursive;
             font-size: 3rem;
         }
 
-        /* Responsive font size for smaller screens */
+        
         @media (max-width: 600px) {
             h1, h2 {
                 font-size: 2rem;
             }
         }
 
-        /* Container for the buttons */
+       
         .buttons {
             margin-top: 30px;
             display: flex;
@@ -46,11 +45,11 @@
             gap: 20px;
         }
 
-        /* General button styles */
+        
         button {
             padding: 15px 30px;
             border: none;
-            border-radius: 50px; /* Rounded buttons */
+            border-radius: 50px;
             cursor: pointer;
             font-size: 1.2rem;
             color: white;
@@ -58,17 +57,17 @@
             font-weight: bold;
         }
 
-        /* Specific style for the 'Yes' button */
+        
         #yes-button {
-            background-color: #4CAF50; /* Green */
+            background-color: #4CAF50;
         }
 
-        /* Specific style for the 'No' button */
+       
         #no-button {
-            background-color: #f44336; /* Red */
+            background-color: #f44336;
         }
 
-        /* Hover effect for buttons */
+        
         #yes-button:hover {
             transform: scale(1.1);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
@@ -78,9 +77,9 @@
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Styles for the success state */
+        
         #success-container {
-            display: none; /* Initially hidden */
+            display: none; 
         }
 
         #celebration-gif {
@@ -89,7 +88,6 @@
             border-radius: 15px;
         }
 
-        /* Confetti animation */
         .confetti {
             position: absolute;
             width: 10px;
@@ -106,23 +104,128 @@
             }
         }
 
-        /* Import for the playful font */
         @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-        /* Style for the starting GIF */
         .start-gif {
             width: 200px;
             height: auto;
             border-radius: 15px;
             margin-bottom: 10px;
         }
+
+        #celebrate-button {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #ff8da1, #ff69b4); 
+            margin: 60px auto 30px; 
+            transform: rotate(-45deg);
+            border-radius: 0;
+            padding: 0;
+            animation: heartbeat 1.2s infinite ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-left: 2px solid rgba(255, 255, 255, 0.6);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 
+                inset 5px 5px 15px rgba(255, 255, 255, 0.4),
+                inset -5px -5px 15px rgba(0, 0, 0, 0.1),
+                5px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        #celebrate-button::before,
+        #celebrate-button::after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #ff8da1, #ff69b4);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 
+                inset 5px 5px 15px rgba(255, 255, 255, 0.4),
+                inset -5px -5px 15px rgba(0, 0, 0, 0.1);
+        }
+        #celebrate-button::before { 
+            top: -75px; 
+            left: 0; 
+            border-bottom: none;
+            border-right: none;
+        }
+        #celebrate-button::after { 
+            left: 75px; 
+            top: 0; 
+            border-bottom: none;
+            border-left: none;
+        }
+
+        #celebrate-button span {
+            transform: rotate(45deg) translateY(-25px);
+            z-index: 1;
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        #celebrate-button:hover {
+            background: linear-gradient(135deg, #ff69b4, #e91e63);
+            animation: heartbeat 0.6s infinite ease-in-out; 
+        }
+        #celebrate-button:hover::before,
+        #celebrate-button:hover::after {
+            background: linear-gradient(135deg, #ff69b4, #e91e63);
+        }
+
+        @keyframes heartbeat {
+            0% { transform: rotate(-45deg) scale(1); }
+            14% { transform: rotate(-45deg) scale(1.1); }
+            28% { transform: rotate(-45deg) scale(1); }
+            42% { transform: rotate(-45deg) scale(1.1); }
+            70% { transform: rotate(-45deg) scale(1); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+
+        /* --- Cinema Mode Styles --- */
+        body.cinema-mode {
+            background: radial-gradient(ellipse at center, #ff1493 0%, #580831 100%);
+            transition: background 1s ease;
+        }
+
+        /* Curtain Styles */
+        .curtain-left, .curtain-right {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 51%;
+            background: repeating-linear-gradient(90deg, #800020, #600000 10%, #800020 20%); /* Velvet texture */
+            z-index: 10;
+            transition: transform 2s ease-in-out;
+        }
+        .curtain-left { left: 0; }
+        .curtain-right { right: 0; }
+
+        .video-wrapper.open .curtain-left { transform: translateX(-100%); }
+        .video-wrapper.open .curtain-right { transform: translateX(100%); }
+
+        /* Video Wrapper with Border */
+        .video-wrapper {
+            position: relative;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+            border: 5px solid black;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden; /* Hide curtains when they slide out */
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- Main content: The initial question and buttons -->
     <div class="container" id="main-container">
-        <!-- REPLACE THE SRC URL BELOW WITH YOUR OWN GIF LINK -->
         <img class="start-gif" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTAyMnkwYm94aHZpZDlkNzM2bzc1ZXhzdnVwZGR2eDk5cjVyNzNtOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/e1Tf1eOo6976zuGv3C/giphy.gif" alt="Cute starting GIF">
         <h1>💝 Will you be my Valentine? 💝</h1>
         <div class="buttons">
@@ -131,7 +234,6 @@
         </div>
     </div>
 
-    <!-- Success content: Shown after clicking 'Yes' -->
     <div class="container" id="success-container">
 <p style="color: rgb(248, 0, 41); font-size: 48px; font-weight: bold;">
   Woohoo 💖 I <span style="color: rgb(255, 121, 143); font-weight: bold;">LOVE</span>  you so much cutie pie!
@@ -145,30 +247,43 @@
 <p>ALL the big bites</p>
 <p>Unlimited cuddles</p>
 <p>Lifetime supply of jokes you can steal</p>
-<p>EFFECTIVE IMMEDIATELY!</p>
+<p>EFFECTIVE IMMEDIATELY!
+<p>Scroll all the way down</p>
+</p>
 
-        </h2>
-        <!-- REPLACE THE SRC URL BELOW WITH YOUR OWN GIF LINK -->
         <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2F4Zjl0bmJqcjFwaWUxenUybnl3amt2ZTQxNzJlcXdjYXBnbm9oOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qKQQUKSSbWBkO2V3KX/giphy.gif" alt="Celebration Picture 1">
+        <br>
+        <button id="celebrate-button"><span>Click here<br>to celebrate</span></button>
+        </div>
+
+    <div class="container" id="video-container" style="display: none;">
+        <h1 style="color: white; text-shadow: 0 2px 5px rgba(0,0,0,0.3);">Our Memories 🎥</h1>
         
+        <div class="video-wrapper">
+            <div class="curtain-left"></div>
+            <div class="curtain-right"></div>
+            <video id="memory-video" controls playsinline style="width: 100%; max-width: 600px; border-radius: 15px; display: block;">
+                <source src="memories.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
     </div>
 
     <script>
-        // --- Element Selection ---
-        // Get references to the HTML elements we'll be interacting with.
+       
         const mainContainer = document.getElementById('main-container');
         const successContainer = document.getElementById('success-container');
         const yesButton = document.getElementById('yes-button');
         const noButton = document.getElementById('no-button');
+        const celebrateButton = document.getElementById('celebrate-button');
+        const videoContainer = document.getElementById('video-container');
+        const memoryVideo = document.getElementById('memory-video');
 
-        // --- State Variables ---
-        // Keep track of the 'No' button click count and the current size of the 'Yes' button.
+       
         let noClickCount = 0;
         let yesButtonSize = 1;
 
-        // --- 'No' Button Messages ---
-        // An array of funny/desperate messages to display on the 'No' button.
+        
         const noButtonMessages = [
             "Really?",
             "Are you sure?",
@@ -180,60 +295,62 @@
             "Okay, fine...",
         ];
 
-        // --- Event Listener for 'No' Button ---
-        // This function runs every time the 'No' button is clicked.
+       
         noButton.addEventListener('click', () => {
-            // Increment the click counter.
+      
             noClickCount++;
 
-            // Increase the size of the 'Yes' button.
-            // We increase padding and font size for a more noticeable effect.
+           
             const currentPadding = 15 * (1 + noClickCount * 0.2);
             const currentFontSize = 1.2 * (1 + noClickCount * 0.2);
             yesButton.style.padding = `${currentPadding}px ${currentPadding * 2}px`;
             yesButton.style.fontSize = `${currentFontSize}rem`;
 
-            // Update the 'No' button's text to a new message from the array.
-            // The modulo operator (%) ensures we loop back to the start of the array.
             noButton.textContent = noButtonMessages[noClickCount % noButtonMessages.length];
         });
 
-        // --- Event Listener for 'Yes' Button ---
-        // This function runs when the 'Yes' button is clicked.
         yesButton.addEventListener('click', () => {
-            // Hide the main question container.
             mainContainer.style.display = 'none';
-            // Show the success/celebration container.
             successContainer.style.display = 'block';
-            // Start the confetti animation.
             startConfetti();
         });
 
-        // --- Confetti Functions ---
-        // An array of pastel colors for the confetti.
+        celebrateButton.addEventListener('click', () => {
+            successContainer.style.display = 'none';
+            videoContainer.style.display = 'block';
+            
+            // Switch to cinema mode
+            document.body.classList.add('cinema-mode');
+
+            // Curtain Animation
+            setTimeout(() => {
+                const videoWrapper = document.querySelector('.video-wrapper');
+                videoWrapper.classList.add('open');
+                
+                setTimeout(() => {
+                    memoryVideo.play();
+                }, 1000); // Wait for curtains to open
+            }, 500);
+        });
+
         const confettiColors = ['#fdefee', '#ffc1cc', '#e91e63', '#f8bbd0', '#c2185b'];
 
         function createConfetti() {
             const confetti = document.createElement('div');
             confetti.classList.add('confetti');
             
-            // Set a random horizontal position.
             confetti.style.left = Math.random() * 100 + 'vw';
-            // Set a random animation duration for a more natural effect.
             confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
-            // Set a random background color from our array.
             confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
 
             document.body.appendChild(confetti);
 
-            // Remove the confetti element after its animation finishes to keep the DOM clean.
             setTimeout(() => {
                 confetti.remove();
             }, 5000);
         }
 
         function startConfetti() {
-            // Create a new piece of confetti every 100 milliseconds for a continuous stream.
             setInterval(createConfetti, 100);
             setInterval(createConfetti, 20);
         }
